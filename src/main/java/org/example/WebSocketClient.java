@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
@@ -18,5 +19,11 @@ public class WebSocketClient {
         socket = new Socket(url, port);
         ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
         oos.writeObject(msg);
+    }
+
+    public String read() throws IOException, ClassNotFoundException {
+        socket = new Socket(url, port);
+        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+        return (String) ois.readObject();
     }
 }
